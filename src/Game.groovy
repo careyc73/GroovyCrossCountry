@@ -1,3 +1,4 @@
+import groupings.Team
 import roles.Runner
 
 /**
@@ -5,9 +6,11 @@ import roles.Runner
  */
 class Game {
     static def main(args) {
-        0.upto(100) {
-            Runner runner = Runner.next()
-            println(runner.firstName << " " << runner.lastName << " " << Utils.timeToString(runner.talent))
+        Team team = Team.buildTeam("Waunakee")
+
+        println(team.teamName)
+        for (Runner runner : team.teamMembers) {
+            println(Utils.describeRunner(runner))
         }
     }
 }
