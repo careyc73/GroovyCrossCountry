@@ -27,11 +27,19 @@ class Utils {
         }
     }
 
+    static def printConferenceRankings = { conferenceSeason ->
+        0.upto(conferenceSeason.teamSeasons.size - 1) {
+            println String.format("%2d %-20s %3d", it + 1,
+                    conferenceSeason.teamSeasons[it].team.teamName, conferenceSeason.teamSeasons[it].conferenceScore)
+        }
+    }
+
     static def describeWithTime = { runner, time ->
         String.format("%-30s%10s%15s%20s", runner.firstName + " " + runner.lastName, timeToString(time), runner.year, runner.team.teamName)
     }
 
     static def run = { runner ->
-        new RunnerPerformance(runner : runner, time : runner.talent * (0.98 + ((double) (random.nextInt(40)) / 100.0)))
+        def performanceCoefficient = 0.975 + ((double) (random.nextInt(50)) / 1000.0)
+        new RunnerPerformance(runner : runner, time : runner.talent * performanceCoefficient)
     }
 }
